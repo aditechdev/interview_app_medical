@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:interview_app_medical/features/auth/screen/auth_screen.dart';
+import 'package:interview_app_medical/features/home/screen/home_screen.dart';
+import 'package:interview_app_medical/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,25 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  final String title;
-  const HomePage({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      onGenerateRoute: (settings) => generateRoute(settings),
+      home: const AuthScreen(),
     );
   }
 }
