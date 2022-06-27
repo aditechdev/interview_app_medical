@@ -41,7 +41,11 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void signInUser() {
-    print("Sign Up User");
+    authServices.signInWithEmailAndPassword(
+      emailTextController.text.trim(),
+      passwordTextController.text.trim(),
+    );
+    
   }
 
   @override

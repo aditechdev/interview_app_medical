@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:interview_app_medical/features/auth/screen/auth_screen.dart';
+import 'package:interview_app_medical/features/auth/services/auth_service.dart';
 import 'package:interview_app_medical/features/home/screen/home_screen.dart';
+import 'package:interview_app_medical/wrapper.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -12,24 +14,28 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        Provider<AuthService>(
+          create: (__) => AuthService(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const Wrapper(),
+        routes: {
+          HomeScreen.routeName: (context) => const HomeScreen(),
+          AuthScreen.routeName: (context) => const AuthScreen(),
+        },
       ),
-      home: const AuthScreen(),
-      routes: {
-        HomeScreen.routeName: (context) => const HomeScreen(),
-        AuthScreen.routeName: (context) => const AuthScreen(),
-      },
     );
   }
 }
-
-
