@@ -1,16 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:interview_app_medical/features/auth/screen/auth_screen.dart';
 import 'package:interview_app_medical/features/home/screen/home_screen.dart';
-import 'package:interview_app_medical/routes.dart';
 
-void main() {
+void main() async {
+  
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,8 +23,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      onGenerateRoute: (settings) => generateRoute(settings),
       home: const AuthScreen(),
+      routes: {
+        HomeScreen.routeName: (context) => const HomeScreen(),
+        AuthScreen.routeName: (context) => const AuthScreen(),
+      },
     );
   }
 }
+
+

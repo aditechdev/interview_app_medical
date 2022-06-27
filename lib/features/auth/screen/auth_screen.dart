@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:interview_app_medical/features/auth/component/custom_form_field.dart';
 import 'package:interview_app_medical/features/auth/component/solid_button.dart';
+import 'package:interview_app_medical/features/auth/services/auth_service.dart';
 import 'package:interview_app_medical/global_color.dart';
 
 enum Auth { register, signIn }
@@ -20,6 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
   TextEditingController emailTextController = TextEditingController();
   TextEditingController nameTextController = TextEditingController();
   TextEditingController passwordTextController = TextEditingController();
+  AuthService authServices = AuthService();
 
   @override
   void dispose() {
@@ -30,6 +32,11 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void signUpUser() {
+    authServices.signUpWithEmailAndPassword(
+        emailTextController.text.trim(),
+        passwordTextController.text.trim(),
+        nameTextController.text.trim(),
+        context);
     print("Sign Up User");
   }
 
@@ -41,7 +48,11 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Welcome To the MediBuddy"),
+        backgroundColor: Colors.white,
+        title: const Text(
+          "Welcome To the MediBuddy",
+          style: TextStyle(color: Colors.black),
+        ),
         elevation: 0,
       ),
       body: SafeArea(
@@ -58,7 +69,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 leading: Radio(
-                    activeColor: GlobalColor.radioButtonActiveColors,
+                    activeColor: Theme.of(context).backgroundColor,
                     value: Auth.register,
                     groupValue: _auth,
                     onChanged: (Auth? value) {

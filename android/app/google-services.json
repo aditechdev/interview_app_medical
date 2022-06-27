@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "177828921725",
+    "firebase_url": "https://interview-app-medical-default-rtdb.firebaseio.com",
+    "project_id": "interview-app-medical",
+    "storage_bucket": "interview-app-medical.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177828921725:android:10b75b199b9d4344220c14",
+        "android_client_info": {
+          "package_name": "com.example.interview_app_medical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177828921725-lgnhi64oj1q6hble2cp24o28egkq8e9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqky7szbDAFXbYdayNlHGCO8gd_kgNueI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177828921725-lgnhi64oj1q6hble2cp24o28egkq8e9d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "177828921725-v4gcmvm5gu12mc246aiik38v6mitjev1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.interviewAppMedical"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
