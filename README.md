@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-Provider | Firebase | Flutter
+Provider | Firebase | Flutter | Shared Prefrence
 
 ## Getting Started
 
