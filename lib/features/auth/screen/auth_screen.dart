@@ -37,7 +37,7 @@ class _AuthScreenState extends State<AuthScreen> {
         passwordTextController.text.trim(),
         nameTextController.text.trim(),
         context);
-    print("Sign Up User");
+    
   }
 
   void signInUser() {

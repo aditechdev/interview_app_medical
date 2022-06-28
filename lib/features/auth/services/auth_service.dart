@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:interview_app_medical/features/auth/model/user_model.dart';
-import 'package:interview_app_medical/global_constant.dart/const_string.dart';
 
 class AuthService {
   bool isSIgnUP = false;
@@ -28,6 +26,7 @@ class AuthService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   //Add User
