@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:interview_app_medical/features/auth/screen/auth_screen.dart';
 import 'package:interview_app_medical/features/auth/services/auth_service.dart';
 import 'package:interview_app_medical/features/home/screen/home_screen.dart';
+import 'package:interview_app_medical/features/home/viewModel/drinks_view_model.dart';
 import 'package:interview_app_medical/wrapper.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,10 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<AuthService>(
           create: (__) => AuthService(),
+          
         ),
+        ChangeNotifierProvider<DrinksViewModel>(create:(__) => DrinksViewModel(),),
+        // StreamProvider<DrinksViewModel>(create: (__)=> DrinksViewModel())
 
         
       ],

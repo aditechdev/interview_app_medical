@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:interview_app_medical/features/auth/services/auth_service.dart';
+import 'package:interview_app_medical/features/home/model/drink_model.dart';
 import 'package:interview_app_medical/features/home/services/drinks_api.dart';
+import 'package:interview_app_medical/features/home/viewModel/drinks_view_model.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home";
@@ -12,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  DrinksAPi? drinksAPi;
+  DrinksAPi drinksAPi = DrinksAPi();
   DateFormat dateFormat = DateFormat.jm();
   String myTime = "";
   @override
@@ -23,7 +26,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    drinksAPi?.drinksAPI();
+    final myModel = Provider.of<DrinksViewModel>(context, listen: false);
+    myModel.getDrinksModel();
+    // drinksAPi.drinksAPI();
 
     super.initState();
   }
@@ -31,6 +36,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 2, vsync: this);
+    final myModel = Provider.of<DrinksViewModel>(context);
+
+    // myModel.fetchDrinkModel();
+    // DrinkModel drinkModel = myModel.getDrinksModel();
     // TickerProvider tickerProvider = const TickerProvider();
 
     logOut() {
@@ -89,13 +98,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: const <Widget>[
-                Center(
-                  child: Text("It's cloudy here"),
-                ),
-                Center(
-                  child: Text("It's rainy here"),
-                ),
+              children: <Widget>[
+                Container(
+                    child: (myModel.loading)
+                        ? Container(
+                            child: Text("Loading"),
+                          )
+                        : ListView.builder(
+                            itemCount: myModel.drinkModel?.drinks?.length,
+                            itemBuilder: ((context, index) => Text(myModel
+                                .drinkModel!.drinks![index].strDrink
+                                .toString())),
+                          )),
+                const Text("Hello"),
               ],
             ),
           )
