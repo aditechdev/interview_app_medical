@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:interview_app_medical/features/auth/services/auth_service.dart';
-import 'package:interview_app_medical/features/home/model/drink_model.dart';
 import 'package:interview_app_medical/features/home/services/drinks_api.dart';
 import 'package:interview_app_medical/features/home/viewModel/drinks_view_model.dart';
 import 'package:intl/intl.dart';
@@ -101,9 +100,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               children: <Widget>[
                 Container(
                     child: (myModel.loading)
-                        ? Container(
-                            child: Text("Loading"),
-                          )
+                        ? const Center(child: CircularProgressIndicator())
                         : ListView.builder(
                             itemCount: myModel.drinkModel?.drinks?.length,
                             itemBuilder: ((context, index) => Text(myModel

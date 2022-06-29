@@ -8,16 +8,14 @@ class DrinksAPi {
   Future<DrinkModel?> drinksAPI() async {
     DrinkModel? drinksData;
     final http = client.Client();
-    
+
     try {
       final response = await http.get(Uri.parse(
           "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=mar"));
 
       if (response.statusCode == 200) {
-        print(response.body);
         final item = jsonDecode(response.body);
         drinksData = DrinkModel.fromJson(item);
-        // print(drinksData);
       } else {
         print("Print Error");
       }
