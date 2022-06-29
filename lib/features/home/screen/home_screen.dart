@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interview_app_medical/features/auth/services/auth_service.dart';
+import 'package:interview_app_medical/features/home/services/drinks_api.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,12 +12,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  DrinksAPi? drinksAPi;
   DateFormat dateFormat = DateFormat.jm();
   String myTime = "";
   @override
   void didChangeDependencies() {
     myTime = dateFormat.format(DateTime.now());
     super.didChangeDependencies();
+  }
+
+  @override
+  void initState() {
+    drinksAPi?.drinksAPI();
+
+    super.initState();
   }
 
   @override
@@ -32,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Medi Buddy"),
+        title: const Text("Brew Court"),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),

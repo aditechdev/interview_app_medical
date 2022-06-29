@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
         Provider<AuthService>(
           create: (__) => AuthService(),
         ),
+
+        
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
