@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:interview_app_medical/features/auth/services/auth_service.dart';
 import 'package:interview_app_medical/features/home/services/drinks_api.dart';
 import 'package:interview_app_medical/features/home/viewModel/drinks_view_model.dart';
+import 'package:interview_app_medical/features/home/viewModel/user_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  DrinksAPi drinksAPi = DrinksAPi();
   DateFormat dateFormat = DateFormat.jm();
   String myTime = "";
   @override
@@ -26,6 +26,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     final myModel = Provider.of<DrinksViewModel>(context, listen: false);
+    final userModel = Provider.of<UserViewModel>(context, listen: false);
+    userModel.getUserModel();
     myModel.getDrinksModel();
     // drinksAPi.drinksAPI();
 
@@ -36,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 2, vsync: this);
     final myModel = Provider.of<DrinksViewModel>(context);
+    final userModel = Provider.of<UserViewModel>(context);
 
     // myModel.fetchDrinkModel();
     // DrinkModel drinkModel = myModel.getDrinksModel();
@@ -101,13 +104,43 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 Container(
                     child: (myModel.loading)
                         ? const Center(child: CircularProgressIndicator())
-                        : ListView.builder(
+                        : GridView.builder(
                             itemCount: myModel.drinkModel?.drinks?.length,
-                            itemBuilder: ((context, index) => Text(myModel
-                                .drinkModel!.drinks![index].strDrink
-                                .toString())),
+                            itemBuilder: ((context, index) {
+                              var data = myModel.drinkModel!.drinks![index];
+                              return Card(
+                                child: Column(
+                                  children: [
+                                    Image.network(
+                                      data.strDrinkThumb.toString(),
+                                      fit: BoxFit.cover,
+                                      // height: 50,
+                                    ),
+                                    Text(data.strDrink.toString())
+                                  ],
+                                ),
+                              );
+                            }),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisExtent: 230,
+                              mainAxisSpacing: 10,
+                            ),
                           )),
-                const Text("Hello"),
+                Container(
+                  child: (userModel.loading)
+                      ? Container()
+                      : ListView.builder(
+                          itemCount: userModel.userModel?.results?.length,
+                          itemBuilder: ((context, index) {
+                            var userData = userModel.userModel!.results![index];
+                            return Card(
+                              child: Text(userData.name!.first.toString()),
+                            );
+                          }),
+                        ),
+                ),
               ],
             ),
           )
