@@ -136,7 +136,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           itemBuilder: ((context, index) {
                             var userData = userModel.userModel!.results![index];
                             return Card(
-                              child: Text(userData.name!.first.toString()),
+                              child: Column(children: [
+                                Text(userData.name!.first.toString()),
+                                Text(userData.name!.first.toString()),
+                                Text(userData.name!.first.toString()),
+                                Text(userData.name!.first.toString()),
+                              ]),
                             );
                           }),
                         ),
